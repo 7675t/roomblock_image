@@ -1,0 +1,20 @@
+sudo: required
+dist: trusty
+language: generic
+addons:
+  apt:
+    packages:
+    - qemu-user-static
+script:
+- sudo ./raspi-build-ros-image.sh
+before_deploy:
+- sudo xz -vz raspi2-ros-kinetic.img
+deploy:
+  provider: releases
+  api_key:
+    secure: 4JCWEsqSjdRGISe/FWGViamPOWRaZCWLJC65vDahrWN14epHAQWWxD7rmt4/4hNP2MKgTP3lt6lGgvRN/8WivOU2WLgtzih4CFu4jtmknLi+y/m5wJlVNXIhmylpICD7FhqCEFkU8pnzobS28i4pvdDfbciD0+LyAx+M6WFgc6qBF9dg23RWOZREUqENxg4LOaNIfr8yOorMk/73fnQsjB+mGkGi4rm41UZXbzqtfhx9Rw+Ahk5y7SOZBb5G0PQNHAyQrqJ41aKXVzvjVshTfcnlGmWhKvEVyP7ac0Ci7KfL0mr6WHe0a4hwPdQaDYH4oeelwWHTL8utPtu4w6UKLWrQtILQLrGYMhWM8r5zCjmMJ1Z0pZSQOsYnAUNJXj1tyJ+Xc7hzeEA0hhNt6wQfEmDYeOawwvp5bl9ugZOJBbltrm5HMsLKJRnWYM4kXT4qqrjsWqzHf4wtYL0RHFDG33chUyarMURENx0TzLFThPlGLE1R5iC/dU/pzlrrFiimICmP+QQZe9rpljN2eA36DuYVK1rm7GDH+yF+MZOFs0afjL73bCm8vm5xfGuZxS8BXt3gmL/qr9RjsVoTEYzaXIkED68ax4xGJsQ+/cZgePIN7z4UyeQJ1F7jQUXmlyJVGOdNNbVe+UEVpVfdKSszpHJQnoO/anGjGZoFhaDZb48=
+  file: raspi2-ros-kinetic.img.xz
+  skip_cleanup: true
+  on:
+    repo: 7675t/raspi_ros
+    tags: true
